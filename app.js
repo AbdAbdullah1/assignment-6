@@ -45,10 +45,14 @@ const selectItem = (event, img) => {
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
+    
   } else {
-    alert('Hey, Already added !')
+    // element.classList.remove('added')
+    toggleSpinner2()
+    } 
+    
   }
-}
+
 
 var timer
 const createSlider = () => {
@@ -150,3 +154,8 @@ const toggleSpinner =(show) => {
   spinner.classList.toggle('d-none');
 images.classList.toggle('d-none');
        };
+      // image toggleSpinner
+      const toggleSpinner2 = (remove) => {
+        let element = event.target;
+        element.classList.toggle('added')
+      }
