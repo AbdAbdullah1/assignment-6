@@ -6,13 +6,10 @@ const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
 // selected image 
 let sliders = [];
-
-
 // If this key doesn't work
 // Find the name in the url and go to their website
 // to create your own api key
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
-
 // show images 
 const showImages = (images) => {
   imagesArea.style.display = 'block';
@@ -24,11 +21,9 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
-    
   })
   toggleSpinner();
 }
-
 const getImages = (query) => {
   toggleSpinner();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
@@ -36,7 +31,6 @@ const getImages = (query) => {
     .then(data => showImages(data.hits))
     .catch(error => console.log(error))
 }
-
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
@@ -45,15 +39,11 @@ const selectItem = (event, img) => {
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
-    
   } else {
     // element.classList.remove('added')
     toggleSpinner2()
     } 
-    
   }
-
-
 var timer
 const createSlider = () => {
 
@@ -67,7 +57,6 @@ const createSlider = () => {
   if (inputDuration < 0) {
     alert('Time cannot Be Minus!!!!.....Default Time duration is set for 1 second')
     document.getElementById('doration').value = 1000
-
   }
   // crate slider previous next area
   sliderContainer.innerHTML = '';
@@ -77,11 +66,9 @@ const createSlider = () => {
   <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
   <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
   `;
-
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
   // hide image aria
-
   imagesArea.style.display = 'none';
   const duration = document.getElementById('doration').value || 1000;
   sliders.forEach(slide => {
@@ -98,33 +85,26 @@ const createSlider = () => {
     changeSlide(slideIndex);
   }, duration);
 }
-
 // change slider index 
 const changeItem = index => {
   changeSlide(slideIndex += index);
 }
-
 // change slide item
 const changeSlide = (index) => {
-
   const items = document.querySelectorAll('.slider-item');
   if (index < 0) {
     slideIndex = items.length - 1
     index = slideIndex;
   };
-
   if (index >= items.length) {
     index = 0;
     slideIndex = 0;
   }
-
   items.forEach(item => {
     item.style.display = "none"
   })
-
   items[index].style.display = "block"
 }
-
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
@@ -132,16 +112,10 @@ searchBtn.addEventListener('click', function () {
   getImages(search.value)
   sliders.length = 0;
 })
-
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
-  //  image countainer
-  // let imageContainer = document.getElementById('image-container')
-  // imageContainer.style.display = 'none'
-
 // Enter Key To Search 
-
 document.getElementById("search")
   .addEventListener("keypress", function (event) {
     if (event.key == 'Enter')
@@ -155,7 +129,7 @@ const toggleSpinner =(show) => {
 images.classList.toggle('d-none');
        };
       // image toggleSpinner
-      const toggleSpinner2 = (remove) => {
+      const toggleSpinner2 = (select) => {
         let element = event.target;
         element.classList.toggle('added')
       }
